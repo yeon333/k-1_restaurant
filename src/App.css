@@ -1,7 +1,29 @@
 .App {
   text-align: center;
 }
+.orange-nav{
+  background: orange;
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.title{
+  background-color: aliceblue;
+  color: orange;
+  font-family: 'Indie Flower', cursive;
+  font-family: 'Rubik Puddles', cursive;
+  font-family: 'Send Flowers', cursive;
+  font-size: 40px;
+}
+#search{
+  background-color: orange;
+  color: aliceblue;
+  border-color: aliceblue;
 
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
