@@ -1,29 +1,20 @@
-.App {
-  text-align: center;
-}
-.orange-nav{
-  background: orange;
-  width: 100%;
-  display: flex;
-  color: white;
-  padding: 20px;
-  font-weight: 600;
-  font-size: 20px;
-}
-.title{
-  background-color: aliceblue;
-  color: orange;
-  font-family: 'Indie Flower', cursive;
-  font-family: 'Rubik Puddles', cursive;
-  font-family: 'Send Flowers', cursive;
-  font-size: 40px;
-}
-#search{
-  background-color: orange;
-  color: aliceblue;
-  border-color: aliceblue;
 
+.map {
+  width: 50%;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 30px;
+  margin-top: 30px;
+  
+  border-style: solid;
+  border-width: medium;
+  border-color: #D8D8D8;
+  float: right;
 }
+
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -57,4 +48,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+}*/

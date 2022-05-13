@@ -1,62 +1,27 @@
 //import logo from './logo.svg';
-import './App.css';
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState ,Suspense} from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Mainguest from './Mainguest';
 //import './Map';
+
+
 function App() {
-   //스크립트 파일 읽어오기
-   const new_script = src => { 
-    return new Promise((resolve, reject) => { 
-      const script = document.createElement('script'); 
-      script.src = src; 
-      script.addEventListener('load', () => { 
-        resolve(); 
-      }); 
-      script.addEventListener('error', e => { 
-        reject(e); 
-      }); 
-      document.head.appendChild(script); 
-    }); 
-  };
+   
   
-  useEffect(() => { 
-    //카카오맵 스크립트 읽어오기
-    const my_script = new_script('https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=03dc1cd16b2238b4463dfbefae251aa9');
-    
-    //스크립트 읽기 완료 후 카카오맵 설정
-    my_script.then(() => { 
-      console.log('script loaded!!!');  
-      const kakao = window['kakao']; 
-      kakao.maps.load(() => {
-        const mapContainer = document.getElementById('map');
-        const options = { 
-          center: new kakao.maps.LatLng(37.56000302825312, 126.97540593203321), //좌표설정
-          level: 3 
-        }; 
-        const map = new kakao.maps.Map(mapContainer, options); //맵생성
-        //마커설정
-        const markerPosition = new kakao.maps.LatLng(37.56000302825312, 126.97540593203321); 
-        const marker = new kakao.maps.Marker({ 
-          position: markerPosition
-        }); 
-        marker.setMap(map); 
-      });   
-    }); 
-  }, []);
 
   return (
-    <div className="App">
-      <div className="orange-nav">
-        <div>K-1 슐랭</div>
-      </div>
-      <span className="title" >K-1 chelin</span>
-      <div class="search-container">
-        <input class="search-bar" type="text" placeholder="식당/지역" />
-        <button id="search">검색</button>
-      </div>
-      
-      <div id="map" className="map"/>
-    </div>
     
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Mainguest />} />
+          
+
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import cn from "classnames";
 import "../styles/Map.scss";
 
+
 const { kakao } = window;
 
 const Map = () => {
@@ -20,10 +21,13 @@ const Map = () => {
   }, []);
 
   return (
-    <div className={cn("Map")}>
+    
+      <div className={cn("Map")}>
       <div className={cn("MapContainer")} id="map">
       </div>
     </div>
+   
+    
   );
 };
 
