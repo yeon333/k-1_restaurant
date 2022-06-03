@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { authService } from "./firebase";
 import './App.css';
 
 const Body = styled.div`
@@ -16,6 +17,7 @@ const SearchBar = styled.input.attrs({
   type:"text",
   placeholder: "식당/지역",
 })`
+
   /*width: 100%;
   padding: 20px 10px 10px;
   background-color: transparent;
@@ -60,17 +62,41 @@ width: 100%;
 display: flex;
 color: white;
 padding: 20px;
+display : flex;
 font-weight: 600;
 font-size: 20px;
 `;
+const Top =styled.div`
 
+`
 const Search = styled.button`
 background-color: orange;
 color: aliceblue;
 border-color: aliceblue;
+
 `;
 
-function Mainguest(){
+const UserInf = styled.button`
+margin-left : auto;
+background: white;
+  border: 9px solid white;
+  border-radius: 11px;
+  color: orange;
+  cursor: pointer;
+  margin-right: 2%;
+`;
+const Logout = styled.button`
+
+background: white;
+  border: 9px solid white;
+  border-radius: 11px;
+  color: orange;
+  cursor: pointer;
+  margin-right: 2%;
+`;
+
+function Mainguest({user}){
+  const [email,setEmail] = useState('');
     const new_script = src => { 
         return new Promise((resolve, reject) => { 
           const script = document.createElement('script'); 
@@ -109,11 +135,20 @@ function Mainguest(){
           });   
         }); 
       }, []);
+
+     
+     
+      const onLogOutClick = () => authService.signOut();
       return(
       <Body>
 
      
-        <OrageNav>K-1 슐랭</OrageNav>
+        <OrageNav>
+          <Top>K-1 슐랭</Top>
+        <UserInf>{user.email}님</UserInf>
+        <Logout onClick={onLogOutClick}>로그아웃</Logout>
+        </OrageNav>
+        
         <Title>K-1 chelin</Title>
         <SearchContainer>
           <SearchBar></SearchBar>
