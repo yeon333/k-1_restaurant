@@ -1,33 +1,46 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import './App.css';
+import usericon from './image/user.png';
 
 const Body = styled.div`
 text-align: center;
 `;
 
 const Cont = styled.div`
-
-  height: 100%
+  height: 100% ;
   
-
 `;
 const SearchBar = styled.input.attrs({
   type:"text",
   placeholder: "식당/지역",
 })`
-  /*width: 100%;
-  padding: 20px 10px 10px;
-  background-color: transparent;
+  width: 40%;
+  float:left;
+  padding:10px 10px 10px;
+ // background-color: transparent;
   border: none;
   border-bottom: 1px solid #999;
   font-size: 18px;
   color: black;
-  outline: none;*/
+  outline: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right:10px;
+  `;
+const Search = styled.button`
+background-color: orange;
+color: aliceblue;
+border-color: aliceblue;
+font-size: 30px;
+//margin-top: 10px;
+//margin-bottom:5px;
 `;
+
 const Title = styled.span`
-background-color: aliceblue;
-color: orange;
+//background-color: aliceblue;
+float:left;
+color: white;
 font-family: 'Indie Flower', cursive;
 font-family: 'Rubik Puddles', cursive;
 font-family: 'Send Flowers', cursive;
@@ -35,7 +48,8 @@ font-size: 40px;
 `;
 
 const SearchContainer = styled.div`
-
+float:left;
+width: 79%;
 `;
 const Result = styled.div`
 width: 35%;
@@ -51,7 +65,6 @@ border-width: medium;
 border-color: #D8D8D8;
 float: left;
 
-
 `;
 
 const OrageNav = styled.div`
@@ -63,14 +76,21 @@ padding: 20px;
 font-weight: 600;
 font-size: 20px;
 `;
-
-const Search = styled.button`
-background-color: orange;
-color: aliceblue;
-border-color: aliceblue;
+const orange_atag=styled.div`
+float: right;
+margin-right:20px;
 `;
 
+
 function Mainguest(){
+  //search 
+  const [inputText, setInputText] = useState("");
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+  
     const new_script = src => { 
         return new Promise((resolve, reject) => { 
           const script = document.createElement('script'); 
@@ -111,20 +131,28 @@ function Mainguest(){
       }, []);
       return(
       <Body>
-
-     
-        <OrageNav>K-1 슐랭</OrageNav>
-        <Title>K-1 chelin</Title>
-        <SearchContainer>
-          <SearchBar></SearchBar>
-          <Search>검색</Search>
-        </SearchContainer>
+        <OrageNav>
+          <SearchContainer>
+            <Title>K-1 chelin </Title>
+            <SearchBar></SearchBar>
+            
+          </SearchContainer>
+          <orange_atag> {/* link 연결 할것!!!  */}
+              오늘의 추천 &nbsp;&nbsp;
+              K-1 슐랭이란 &nbsp;&nbsp;
+              <img src={usericon} width='30px' />
+          </orange_atag>
+      
+        </OrageNav>
+        
+        
         <Cont>
         <Result>검색결과</Result>
         <div id="map" className="map"/>
         
-        
         </Cont>
+        
+  
       </Body>
       )
 }
