@@ -28,6 +28,7 @@ const SignButton = styled.button`
   color: ${Colors.White};
   margin-top: 10px;
   margin-right: 5px;
+  cursor: pointer;
 `;
 
 const Advertise = styled.div``;
@@ -40,6 +41,7 @@ const LoginForm = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   height: 0vh;
+
 `;
 
 const LoginTextForm = styled.div``;
@@ -156,6 +158,7 @@ const LoginButton = styled.button.attrs({ type: "submit" })`
   color: ${Colors.White};
   border: none;
   border-radius: 25px;
+  cursor: pointer;
 `;
 const GoogleLoginArea = styled.div`
   text-align: center;

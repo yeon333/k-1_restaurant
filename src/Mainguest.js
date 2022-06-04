@@ -1,35 +1,47 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { authService } from "./firebase";
 import './App.css';
+import { authService } from "./firebase";
+import usericon from './img/user.png';
 
 const Body = styled.div`
-text-align: center;
+
 `;
 
 const Cont = styled.div`
-
-  height: 100%
+  height: 100% ;
   
-
 `;
 const SearchBar = styled.input.attrs({
   type:"text",
   placeholder: "식당/지역",
 })`
-
-  /*width: 100%;
-  padding: 20px 10px 10px;
-  background-color: transparent;
+  width: 40%;
+  float:left;
+  padding:10px 10px 10px;
+ // background-color: transparent;
   border: none;
   border-bottom: 1px solid #999;
   font-size: 18px;
   color: black;
-  outline: none;*/
+  outline: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right:10px;
+  `;
+const Search = styled.button`
+background-color: orange;
+color: aliceblue;
+border-color: aliceblue;
+font-size: 30px;
+//margin-top: 10px;
+//margin-bottom:5px;
 `;
+
 const Title = styled.span`
-background-color: aliceblue;
-color: orange;
+//background-color: aliceblue;
+float:left;
+color: white;
 font-family: 'Indie Flower', cursive;
 font-family: 'Rubik Puddles', cursive;
 font-family: 'Send Flowers', cursive;
@@ -37,7 +49,8 @@ font-size: 40px;
 `;
 
 const SearchContainer = styled.div`
-
+float:left;
+width: 60%;
 `;
 const Result = styled.div`
 width: 35%;
@@ -53,7 +66,6 @@ border-width: medium;
 border-color: #D8D8D8;
 float: left;
 
-
 `;
 
 const OrageNav = styled.div`
@@ -62,19 +74,26 @@ width: 100%;
 display: flex;
 color: white;
 padding: 20px;
-display : flex;
+
+`;
+const Recommend=styled.div`
+margin-left : auto;
+margin-right: 2%;
+justify-content: center;
+display: flex;
+align-items: center;
 font-weight: 600;
 font-size: 20px;
 `;
-const Top =styled.div`
 
-`
-const Search = styled.button`
-background-color: orange;
-color: aliceblue;
-border-color: aliceblue;
-
+const Define=styled.div`
+display: flex;
+align-items : center;
+margin-right: 2%;
+font-weight: 600;
+font-size: 20px;
 `;
+
 
 const UserInf = styled.button`
 margin-left : auto;
@@ -96,7 +115,14 @@ background: white;
 `;
 
 function Mainguest({user}){
-  const [email,setEmail] = useState('');
+  //search 
+  const [inputText, setInputText] = useState("");
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+  
     const new_script = src => { 
         return new Promise((resolve, reject) => { 
           const script = document.createElement('script'); 
@@ -136,30 +162,30 @@ function Mainguest({user}){
         }); 
       }, []);
 
-     
-     
       const onLogOutClick = () => authService.signOut();
       return(
       <Body>
-
-     
         <OrageNav>
-          <Top>K-1 슐랭</Top>
-        <UserInf>{user.email}님</UserInf>
-        <Logout onClick={onLogOutClick}>로그아웃</Logout>
+          <SearchContainer>
+            <Title>K-1 chelin </Title>
+            <SearchBar></SearchBar>
+            
+          </SearchContainer>
+          <Recommend>오늘의 추천</Recommend>
+          <Define>K-1 슐랭이란</Define> 
+       
+          <UserInf>{user.email}님</UserInf>
+          <Logout onClick={onLogOutClick}>로그아웃</Logout>
         </OrageNav>
         
-        <Title>K-1 chelin</Title>
-        <SearchContainer>
-          <SearchBar></SearchBar>
-          <Search>검색</Search>
-        </SearchContainer>
+        
         <Cont>
         <Result>검색결과</Result>
         <div id="map" className="map"/>
         
-        
         </Cont>
+        
+  
       </Body>
       )
 }
