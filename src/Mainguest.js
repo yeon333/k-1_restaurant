@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import './App.css';
-import usericon from './image/user.png';
+import { authService } from "./firebase";
+import usericon from './img/user.png';
 
 const Body = styled.div`
-text-align: center;
+
 `;
 
 const Cont = styled.div`
@@ -49,7 +50,7 @@ font-size: 40px;
 
 const SearchContainer = styled.div`
 float:left;
-width: 79%;
+width: 60%;
 `;
 const Result = styled.div`
 width: 35%;
@@ -73,16 +74,47 @@ width: 100%;
 display: flex;
 color: white;
 padding: 20px;
+
+`;
+const Recommend=styled.div`
+margin-left : auto;
+margin-right: 2%;
+justify-content: center;
+display: flex;
+align-items: center;
 font-weight: 600;
 font-size: 20px;
 `;
-const orange_atag=styled.div`
-float: right;
-margin-right:20px;
+
+const Define=styled.div`
+display: flex;
+align-items : center;
+margin-right: 2%;
+font-weight: 600;
+font-size: 20px;
 `;
 
 
-function Mainguest(){
+const UserInf = styled.button`
+margin-left : auto;
+background: white;
+  border: 9px solid white;
+  border-radius: 11px;
+  color: orange;
+  cursor: pointer;
+  margin-right: 2%;
+`;
+const Logout = styled.button`
+
+background: white;
+  border: 9px solid white;
+  border-radius: 11px;
+  color: orange;
+  cursor: pointer;
+  margin-right: 2%;
+`;
+
+function Mainguest({user}){
   //search 
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
@@ -129,6 +161,8 @@ function Mainguest(){
           });   
         }); 
       }, []);
+
+      const onLogOutClick = () => authService.signOut();
       return(
       <Body>
         <OrageNav>
@@ -137,12 +171,11 @@ function Mainguest(){
             <SearchBar></SearchBar>
             
           </SearchContainer>
-          <orange_atag> {/* link 연결 할것!!!  */}
-              오늘의 추천 &nbsp;&nbsp;
-              K-1 슐랭이란 &nbsp;&nbsp;
-              <img src={usericon} width='30px' />
-          </orange_atag>
-      
+          <Recommend>오늘의 추천</Recommend>
+          <Define>K-1 슐랭이란</Define> 
+       
+          <UserInf>{user.email}님</UserInf>
+          <Logout onClick={onLogOutClick}>로그아웃</Logout>
         </OrageNav>
         
         
