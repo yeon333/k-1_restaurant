@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled, {css} from 'styled-components';
-import ResImage from './img1.jpg'
-import UserStar from './UserStar.css'
+import ResImage from './img/restaurant_img1.jpg';
+import UserStar from './UserStar.css';
 
 const SearchBar = styled.input.attrs({
   type:"text",
