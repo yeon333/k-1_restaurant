@@ -26,7 +26,7 @@ function App() {
       setInit(true);
     });
   }, []);
-  //console.log(isLoggedIn,user);
+  
 
   return (
     
