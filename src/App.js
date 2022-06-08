@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./View/Login";
 import Signup from "./View/Signup";
 import Mainguest from './Mainguest';
-
+import RestInfo from "./RestInfo";
 import { authService } from "./firebase";
 
 
@@ -46,7 +46,7 @@ function App() {
           }
           
           <Route path="/" element={<Login />} />
-          
+          <Route path="/restinfo" element={<RestInfo/>}/>
           <Route path="/mainguest" element={<Mainguest />} />
           <Route path="/signup" element = {<Signup />}/>
           
