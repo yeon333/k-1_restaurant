@@ -1,39 +1,11 @@
 import React, {useState} from "react";
 import styled, {css} from 'styled-components';
+
+
 import ResImage from './img/restaurant_img1.jpg';
 import UserStar from './UserStar.css';
 
-const SearchBar = styled.input.attrs({
-  type:"text",
-  placeholder: "식당/지역",
-})`
-  width: 40%;
-  float:left;
-  padding:10px 10px 10px;
- // background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #999;
-  font-size: 18px;
-  color: black;
-  outline: none;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right:10px;
-  margin-bottom:5px;
-  `;
-const Search = styled.button`
-background-color: orange;
-color: aliceblue;
-padding: 5px 5px;
-border-color: aliceblue;
-font-size: 20px;
-margin-top: 10px;
-margin-bottom:5px;
 
-&:hover {
-  background-color: grey;
-}
-`;
 const Title = styled.span`
 //background-color: aliceblue;
 float:left;
@@ -56,7 +28,6 @@ border-bottom: 1px solid #E0E0E0;
 margin-bottom: 20px;
 border: 0;
 `;
-
 const Name = styled.span`
   color: black;
   font-size: 36px;
@@ -67,7 +38,6 @@ const Name = styled.span`
   margin-left: 20px;
   margin-bottom: 50px;
 `;
-
 const Line = styled.div`
 width: 98%;
 height: 1%;
@@ -75,7 +45,6 @@ border: 1px solid #E0E0E0;
 margin-left: 20px;
 margin-bottom: 10px;
 `;
-
 const Image = styled.div`
   background-image: url(${ResImage});
   width: 98%;
@@ -83,7 +52,6 @@ const Image = styled.div`
   height: 160px;
   margin-left: 20px;
 `;
-
 const Address = styled.span`
   padding: 5px;
   border: 2px solid #aaa;
@@ -250,19 +218,16 @@ const EnterReview = styled.button`
   float: right;
   margin-right: 4%;
 `;
-
 const ReviewAlert = ({onClick}) => {
   alert("감사합니다. 리뷰가 등록되었습니다.");
 }
-
 function RestInfo() {
   return (
     
 		<div>
       <SearchContainer>
           <Title as="a" href="https://www.google.com" style={{ textDecoration: 'none' }}>K-1 chelin </Title>
-          <SearchBar></SearchBar>
-          <Search>검색</Search>
+         
       </SearchContainer>
        
       <p><Name>식당 이름(참조)</Name><ScoreInfo>평점(참조)</ScoreInfo></p>
