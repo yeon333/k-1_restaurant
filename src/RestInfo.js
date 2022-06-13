@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled, {css} from 'styled-components';
-
-
+import { useNavigate } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
 import ResImage from './img/restaurant_img1.jpg';
 import UserStar from './UserStar.css';
 
@@ -218,10 +218,16 @@ const EnterReview = styled.button`
   float: right;
   margin-right: 4%;
 `;
-const ReviewAlert = ({onClick}) => {
-  alert("감사합니다. 리뷰가 등록되었습니다.");
-}
-function RestInfo() {
+
+
+function RestInfo({}) {
+  const location = useLocation();
+  const [score,setScore] = useState(4.2);
+  const [storeName, setStoreName] = useState(location.state.name);
+  const ReviewAlert = ({onClick}) => {
+    alert("감사합니다. 리뷰가 등록되었습니다.");
+    setScore(4.4);
+  }
   return (
     
 		<div>
@@ -230,14 +236,14 @@ function RestInfo() {
          
       </SearchContainer>
        
-      <p><Name>식당 이름(참조)</Name><ScoreInfo>평점(참조)</ScoreInfo></p>
+      <p><Name>{storeName}</Name><ScoreInfo>{score}</ScoreInfo></p>
       <p><Image/></p>
-      <p><Address>주소</Address><AddInfo>식당주소(참조)</AddInfo></p>
-      <p><Sort>식당 종류</Sort><SortInfo>참조</SortInfo></p>
-      <p><TelNum>전화번호</TelNum><TelNumInfo>참조</TelNumInfo></p>
+      <p><Address>주소</Address><AddInfo>서울특별시 서초구 양재동 202</AddInfo></p>
+      <p><Sort>식당 종류</Sort><SortInfo>고기</SortInfo></p>
+      <p><TelNum>전화번호</TelNum><TelNumInfo>02-3463-1711</TelNumInfo></p>
       <p><Menu>메뉴</Menu><MenuInfo>해당 기능은 추후에 추가될 예정입니다.</MenuInfo></p>
-      <br/><br/><p><Euione>국회의원</Euione><EoInfo>참조</EoInfo></p>
-      <p><EuioneArea>지역명</EuioneArea><EoAInfo>참조</EoAInfo></p>
+      <br/><br/><p><Euione>국회의원</Euione><EoInfo>추미애</EoInfo></p>
+      <p><EuioneArea>지역명</EuioneArea><EoAInfo>서울시 서초구</EoAInfo></p>
       <p><Line></Line></p>
       <p><Line></Line></p>
       <p><ReviewButton onCreate = {
