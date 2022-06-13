@@ -5,7 +5,11 @@ import { authService } from "./firebase";
 import axios from 'axios';
 import usericon from './img/user.png';
 import { useNavigate } from "react-router-dom";
-
+import Modal from './modal.js';
+import appleicon from './img/apple.png';
+import googleicon from './img/googleplay.png';
+/////
+import { Link } from "react-router-dom";
 const Body = styled.div`
 
 `;
@@ -66,7 +70,7 @@ font-size: 25px;
 `
 const SearchContainer = styled.form`
 float:left;
-width: 60%;
+width: 55%;
 `;
 const Result = styled.div`
 width: 35%;
@@ -94,20 +98,26 @@ padding: 20px;
 `;
 const Recommend = styled.div`
 margin-left : auto;
-margin-right: 2%;
+margin-right: 5%;
 justify-content: center;
 display: flex;
 align-items: center;
 font-weight: 600;
 font-size: 20px;
+cursor: pointer;
 `;
 
-const Define = styled.div`
+const Define=styled.div`
 display: flex;
 align-items : center;
-margin-right: 2%;
+margin-right: 5%;
 font-weight: 600;
 font-size: 20px;
+
+color:white;
+
+cursor: pointer;
+white-space: nowrap;
 `;
 
 const UserInf = styled.button`
@@ -129,6 +139,34 @@ background: white;
   cursor: pointer;
   margin-right: 2%;
 `;
+
+const Footer = styled.div`
+position: fixed; /* 이 부분을 고정 */
+bottom: 0; /* 하단에 여백 없이 */
+position : absolute;
+left : 40%;
+justify-content: center;
+width 100%;
+`;
+const Imgapple = styled.img.attrs((props) => ({
+  src: appleicon,
+  size:  "130px",
+}))`
+width: 150px;
+height: 110px;
+margin: 30px 10px;
+
+`;
+
+const Imggoogleplay = styled.img.attrs((props) => ({
+  src: googleicon,
+  size:  "130px",
+}))`
+width: 180px;
+height: 170px;
+margin: 0 auto;
+margin-left: 5%;
+`;
 var geocoder;
 var kakao;
 var map;
@@ -138,12 +176,14 @@ function Mainguest({ user }) {
   const [inputText, setInputText] = useState("");
   const [show, setShow] = useState(false);
   const [result, setResult] = useState("");
- 
+  const [flag, setFlag] = useState(1);
   const navigate = useNavigate();
-
+  const onDefine = (e) =>{
+    navigate("/about");
+  }
   const currentInf = (e) => {
     console.log(e.currentTarget.innerText);
-    navigate("/restinfo", { state: e.currentTarget });
+    navigate("/restinfo", {state:{id:1,name:`${e.currentTarget.innerText}`}});
     ;
   }
   const onChangeSearch = (e) => {
@@ -182,8 +222,8 @@ function Mainguest({ user }) {
   const Data = ({ data }) => {
     return (
       <List>
-        <b onClick={currentInf}>{data.storeName} - </b>
-        <span>{data.foodCf}</span>
+        <b onClick={currentInf}>{data.storeName} </b>
+        <span>  - {data.foodCf}</span>
 
       </List>
 
@@ -214,7 +254,7 @@ function Mainguest({ user }) {
       kakao.maps.load(() => {
         var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
         var mapOption = {
-          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          center: new kakao.maps.LatLng(37.550701, 127.000667), // 지도의 중심좌표
           level: 8 // 지도의 확대 레벨
         };
 
@@ -223,10 +263,11 @@ function Mainguest({ user }) {
         geocoder = new kakao.maps.services.Geocoder();
       });
     });
-  }, []);
+  }, [flag]);
 
   const onLogOutClick = () => authService.signOut();
   const onSearch = (e) => {
+    setFlag(flag*-1);
     setShow(true);
     e.preventDefault();
     axios({
@@ -243,6 +284,16 @@ function Mainguest({ user }) {
       })
     })
   };
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  /// modal end 
   return (
     <Body>
       <OrageNav>
@@ -252,17 +303,22 @@ function Mainguest({ user }) {
           <Search>검색</Search>
 
         </SearchContainer>
-        <Recommend>오늘의 추천</Recommend>
-        <Define>K-1 슐랭이란</Define>
+        <Recommend onClick={openModal}>오늘의추천</Recommend>
+        <Modal open={modalOpen} close={closeModal} header="오늘은 뭐 먹을까?"></Modal>
+        
 
-        <UserInf>{user.email}님</UserInf>
+       
+        <Define onClick={onDefine}>K-1 슐랭이란</Define>
+        
+
+        <UserInf>{user.email}</UserInf>
         <Logout onClick={onLogOutClick}>로그아웃</Logout>
       </OrageNav>
 
 
       <Cont>
 
-        {show ? <Result><Default> menu List</Default>
+        {show ? <Result><Default> Store List</Default>
           {result && result.map(data => (
             <Data data={data} />
           ))} </Result> : <Result><Default> Store List</Default></Result>
@@ -271,10 +327,12 @@ function Mainguest({ user }) {
 
 
         <div id="map" className="map" />
-
+      
       </Cont>
-
-
+      <Footer>
+      <Imgapple></Imgapple>
+      <Imggoogleplay></Imggoogleplay>  
+      </Footer>
     </Body>
   )
 }

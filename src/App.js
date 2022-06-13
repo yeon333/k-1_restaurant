@@ -7,7 +7,7 @@ import Signup from "./View/Signup";
 import Mainguest from './Mainguest';
 import RestInfo from "./RestInfo";
 import { authService } from "./firebase";
-
+import About from "./About";
 
 function App() {
    
@@ -35,7 +35,7 @@ function App() {
         <Routes>
           {init? (isLoggedIn ? (
             <>
-              <Route path="/" element={<Mainguest user = {userObj} />} />
+              <Route path="/mainguest" element={<Mainguest user = {userObj} />} />
             </>
           ) : (
             <Route path="/" element={<Login />} />
@@ -49,7 +49,7 @@ function App() {
           <Route path="/restinfo" element={<RestInfo/>}/>
           <Route path="/mainguest" element={<Mainguest />} />
           <Route path="/signup" element = {<Signup />}/>
-          
+          <Route path="/about" element = {<About user = {userObj}/>}/>
 
         </Routes>
       </BrowserRouter>
